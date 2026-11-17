@@ -7,7 +7,7 @@ window.initHero3D = function (el, hist, cono, onHover) {
     renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   } catch (e) { return; }
   const W = () => el.clientWidth, H = () => el.clientHeight;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
   renderer.setSize(W(), H());
   el.appendChild(renderer.domElement);
 
@@ -109,11 +109,17 @@ window.initHero3D = function (el, hist, cono, onHover) {
   });
   el.addEventListener("pointerleave", () => { mx = 0; my = 0; onHover && onHover(null); });
 
-  let t0 = performance.now(), visible = true;
+  let t0 = performance.now(), visible = true, last = t0, slow = 0, lite = false, lastDraw = 0, moved = true;
   new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(el);
+  el.addEventListener("pointermove", () => { moved = true; });
   (function loop(t) {
     requestAnimationFrame(loop);
-    if (!visible) return;
+    if (!visible || document.hidden) return;
+    // modo liviano: si el equipo no da (cuadros > 60 ms), baja la resolución y dibuja ~4 veces por segundo
+    const dt = t - last; last = t;
+    if (!lite) { slow = dt > 60 ? slow + 1 : Math.max(0, slow - 1); if (slow > 20) { lite = true; renderer.setPixelRatio(0.6); renderer.setSize(W(), H()); } }
+    if (lite && !moved && t - lastDraw < 250) return;
+    lastDraw = t; moved = false;
     const s = (t - t0) / 1000;
     group.rotation.y += ((mx * 0.35 - 0.28 + Math.sin(s * 0.15) * 0.06) - group.rotation.y) * 0.04;
     group.rotation.x += ((my * 0.12 + 0.06) - group.rotation.x) * 0.04;

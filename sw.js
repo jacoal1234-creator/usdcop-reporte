@@ -1,6 +1,6 @@
 /* Service worker: la app abre sin internet con los últimos datos vistos.
    Si cambias index.html o hero3d.js, sube V para que los celulares bajen lo nuevo. */
-const V = "usdcop-v1";
+const V = "usdcop-v2";
 const SHELL = ["./", "index.html", "hero3d.js", "manifest.webmanifest", "icons/icon-192.png", "icons/icon-512.png",
   "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js",
   "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js",

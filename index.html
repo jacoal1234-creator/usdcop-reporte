@@ -498,7 +498,7 @@ Promise.all(FILES.map(n => fetch(`data/${n}.csv`, { cache: "no-store" }).then(r 
   .then(txts => { FILES.forEach((n, i) => S[n] = parseCSV(txts[i])); S.r = S.resumen[0]; render(); })
   .catch(e => { const el = $("#err"); el.style.display = "block"; el.textContent = "No se pudieron cargar los datos (" + e.message + "). Recarga la página."; endLoader(); });
 
-function endLoader() { document.body.classList.remove("loading"); const l = $("#loader"); if (l) l.remove(); }
+function endLoader() { document.body.classList.remove("loading"); const l = $("#loader"); if (l) l.remove(); if (window.__start3D && !window.__3d) { window.__3d = true; setTimeout(window.__start3D, 50); } }
 
 function render() {
   const r = S.r;
@@ -520,12 +520,12 @@ function hero(r) {
   $("#chip-txt").textContent = `Actualizado ${fdl(r.actualizado)} · al viernes: ${n0(vie.p10)}–${n0(vie.p90)} (80%)`;
   const hist = S.trm.slice(-260).map(x => ({ f: x.fecha, v: x.trm }));
   const tip = $("#tip");
-  try {
+  window.__start3D = () => { try {
     window.initHero3D($("#scene"), hist, S.cono, (pt, x, y) => {
       if (!pt) { tip.classList.remove("show"); return; }
       tip.textContent = `${fd(pt.f)} · $${nf(pt.v)}`; tip.style.left = x + "px"; tip.style.top = y + "px"; tip.classList.add("show");
     });
-  } catch (e) { console.warn("3D no disponible", e); }
+  } catch (e) { console.warn("3D no disponible", e); } };
 }
 
 function marquee(r) {
@@ -798,6 +798,7 @@ function archivo(r) {
 function intro(r) {
   if (!window.gsap) { document.body.classList.add("no-anim"); endLoader(); return; }
   gsap.registerPlugin(ScrollTrigger);
+  gsap.ticker.lagSmoothing(0); // animaciones por tiempo real, aunque el equipo sea lento
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduce) { document.body.classList.add("no-anim"); endLoader(); return; }
   const o = { v: 0 }, ld = $("#ld-n"), bar = $("#ld-b");
