@@ -65,6 +65,10 @@ Orden de ejecución:
 2. `python3 execution/model.py` → `.tmp/semanal.csv`, `.tmp/backtest.csv`, `.tmp/cono.csv`, `.tmp/modelo.json`
 3. `python3 execution/build_outputs.py --etiqueta AAAA-MM-DD` → `reportes/<etiqueta>_usdcop.xlsx` y `reportes/<etiqueta>_cono.png`
 4. El agente investiga noticias, consenso y calendario en la web y redacta `reportes/<etiqueta>_diario.md` o `_semanal.md` con las cifras de `.tmp/modelo.json`. Nunca escribe cifras a mano que el modelo ya produce.
+5. `python3 execution/build_readme.py --etiqueta AAAA-MM-DD` → regenera `README.md` (portada visual del repo: KPIs, resumen del último reporte, cono, barras semanales, horizontes y lista de reportes) y `reportes/<etiqueta>_semanas.png`. Va después del paso 4 porque copia el resumen ejecutivo del reporte más reciente.
+
+## Automatización
+- Tarea programada local `reporte-usdcop-lunes`: cada lunes a las 10:00 (hora local) corre todo el flujo, escribe `reportes/<fecha>_semanal.md` y hace commit y push. Solo corre si la app de Claude está abierta; si estaba cerrada, corre al volver a abrirla.
 
 ## Salidas
 - Reportes en Markdown en `reportes/` (GitHub los muestra directamente), más el Excel y el PNG del mismo día.
