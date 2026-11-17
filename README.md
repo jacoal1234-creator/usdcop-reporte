@@ -1,5 +1,7 @@
 # 💵 USD/COP · Reporte del dólar en Colombia
 
+> 🌐 **Web interactiva: https://jacoal1234-creator.github.io/usdcop-reporte/**
+>
 > Uso personal · Serie base: TRM oficial (Superfinanciera) · Actualizado: **2026-11-17**
 > Análisis informativo y educativo. No es recomendación de inversión.
 

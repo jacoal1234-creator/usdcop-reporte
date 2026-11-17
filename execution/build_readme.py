@@ -88,6 +88,8 @@ def main():
     cono = f"reportes/{a.etiqueta}_cono.png"
     md = f"""# 💵 USD/COP · Reporte del dólar en Colombia
 
+> 🌐 **Web interactiva: https://jacoal1234-creator.github.io/usdcop-reporte/**
+>
 > Uso personal · Serie base: TRM oficial (Superfinanciera) · Actualizado: **{a.etiqueta}**
 > Análisis informativo y educativo. No es recomendación de inversión.
 

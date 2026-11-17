@@ -1,0 +1,12 @@
+perfil,etiqueta,texto
+importador,H,"El dólar está en la parte alta de su rango de 3 meses y cerca de la resistencia de ~$3.350."
+importador,E,"El consenso de analistas espera un cierre de año más bajo que el nivel actual, pero la Fed del 9-dic puede empujar al alza antes."
+importador,O,"Prácticas comunes: escalonar compras en varias fechas y cubrir con forwards los pagos con fecha conocida. Con ~8,4 puntos de diferencial de tasas, el forward a 1 mes queda ~0,7% sobre el spot."
+exportador,H,"Los niveles actuales son mejores que los de octubre (mínimo de $3.148 el 28-oct)."
+exportador,E,"La estacionalidad de fin de año y una Fed en pausa podrían devolver la TRM hacia $3.200–3.250."
+exportador,O,"Prácticas comunes: vender por tramos, forwards de venta (el punto forward juega a favor, ~0,7% mensual) u opciones put USD para proteger un piso."
+riesgo,O,"Choque geopolítico en Medio Oriente que revierta la caída del Brent, o ruptura del acuerdo EE. UU.–Irán."
+riesgo,O,"Una Fed que sorprenda (50 pb o pausa): el mercado da ~93% a un alza de 25 pb."
+riesgo,O,"Ruido fiscal o político en Colombia: la reforma se diluye, una rebaja de calificación o un salario mínimo muy alto."
+riesgo,O,"Cambio de régimen de volatilidad: el GARCH se estimó con 3 años de datos."
+riesgo,H,"El modelo no incluye la prima de riesgo de Colombia (CDS/EMBI) ni los TES, y la regresión explica menos del 10% del movimiento semanal."

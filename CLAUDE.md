@@ -31,6 +31,9 @@
 
 ### Registro de aprendizajes
 
+- **2026-11-17 — Web estilo nyc-trip-2026:** el usuario quiere que el repo se vea como su proyecto de New York (`../New York/nyc-trip-2026`): `index.html` hecho a mano con loader, menú en píldora, portada oscura con 3D (Three.js), GSAP, modo oscuro, PWA y datos en CSV dentro de `data/`. **Por qué importa:** la web es el entregable principal; el README y los .md quedan como respaldo. Cualquier dato nuevo va a un CSV, no al HTML.
+- **2026-11-17 — pandas 3:** `DataFrame.last("400D")` ya no existe. **Por qué importa:** filtrar por fecha con `df[df.index >= df.index.max() - pd.Timedelta(days=N)]`.
+- **2026-11-17 — Gráficos SVG en el celular:** con un viewBox fijo de 1000 px el texto queda ilegible en 375 px. **Por qué importa:** los gráficos calculan el ancho real del contenedor (`cw()`) y se redibujan al cambiar el tamaño.
 - **2026-11-17 — Pronóstico de la semana:** el usuario quiere un pronóstico día a día hasta el viernes, además de los horizontes de 1 semana, 4 semanas y 3 meses. `execution/pronostico_semana.py` simula trayectorias diarias completas para dar rangos por día y la probabilidad de tocar soportes y resistencias. **Por qué importa:** cada reporte debe traer la tabla "esta semana hasta el viernes" (sección 4.0). Recordar que la TRM del viernes sale de las operaciones del jueves.
 - **2026-11-17 — Ojo con el calendario:** se escribió "viernes 21-nov" cuando el viernes era el 20. **Por qué importa:** calcular las fechas con código (pandas), nunca de memoria.
 - **2026-11-17 — datos.gov.co intermitente:** hacia las 12:30 p. m. la API de la TRM respondió "Service unavailable". **Por qué importa:** si falla, reintentar más tarde o usar la última TRM ya descargada en `.tmp/`, y decirlo en el reporte.

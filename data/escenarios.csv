@@ -1,0 +1,13 @@
+horizonte,escenario,desde,hasta,prob_modelo,mediana
+Viernes 20-11,bajista_dolar,,3295,0.297,3274
+Viernes 20-11,base,3295,3338,0.411,3317
+Viernes 20-11,alcista_dolar,3338,,0.292,3360
+1 semana,bajista_dolar,,3289,0.294,3262
+1 semana,base,3289,3345,0.411,3317
+1 semana,alcista_dolar,3345,,0.295,3372
+4 semanas,bajista_dolar,,3259,0.296,3203
+4 semanas,base,3259,3375,0.407,3317
+4 semanas,alcista_dolar,3375,,0.297,3434
+3 meses,bajista_dolar,,3213,0.301,3109
+3 meses,base,3213,3423,0.399,3316
+3 meses,alcista_dolar,3423,,0.3,3532

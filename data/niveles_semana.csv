@@ -1,0 +1,5 @@
+nivel,sentido,prob_tocar
+3200,baja,0.006
+3270,baja,0.157
+3350,sube,0.266
+3400,sube,0.034

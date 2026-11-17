@@ -45,7 +45,7 @@ def main():
     viernes = hoy + pd.Timedelta(days=(4 - hoy.weekday()) % 7)
     dias = [d for d in pd.date_range(hoy + pd.Timedelta(days=1), viernes, freq="B") if d not in festivos]
     n_pasos = len(dias) + 1  # +1: TRM del fin de semana (operaciones del viernes)
-    etiquetas = [d.strftime("%a %d-%b") for d in dias] + ["Sáb–lun (sale del viernes)"]
+    etiquetas = [d.strftime("%Y-%m-%d") for d in dias] + ["fin_de_semana"]
 
     rng = np.random.default_rng(SEMILLA)
     nu = g["nu"]

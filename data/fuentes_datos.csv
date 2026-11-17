@@ -1,0 +1,6 @@
+serie,fuente,ultima_fecha,error,consulta
+TRM,https://www.datos.gov.co/resource/32sa-8pi3.json,2026-11-16,,2026-11-17
+DXY,https://finance.yahoo.com/quote/DX-Y.NYB,2026-11-17,,2026-11-17
+BRENT,https://finance.yahoo.com/quote/BZ=F,2026-11-17,,2026-11-17
+UST10,https://finance.yahoo.com/quote/%5ETNX (respaldo; FRED falló),2026-11-17,,2026-11-17
+FEDFUNDS,https://fred.stlouisfed.org/series/DFF,,https://fred.stlouisfed.org/graph/fredgraph.csv?id=DFF&cosd=2023-01-01 falló tras 3 intentos: The read operation timed out,2026-11-17

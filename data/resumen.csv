@@ -1,0 +1,2 @@
+actualizado,trm,trm_fecha,trm_ant,trm_ant_fecha,min_3m,max_3m,min_3m_fecha,max_3m_fecha,sigma_diaria_pct,sigma_lp_pct,garch_nu,valor_central_usa,arima_orden,mae_arima,mae_caminata,mape_arima,mape_caminata,acierto_dir,sesgo_arima,reg_r2,reg_n,b_dxy,b_brent,b_ust,p_dxy,p_brent,p_ust,semana_min_mediana,semana_max_mediana
+2026-11-17,3316.7,2026-11-16,3301.91,2026-11-13,3048.12,3349.63,2026-08-24,2026-09-29,0.746,0.825,9.93,caminata aleatoria,"(2, 0, 0)",57.5,56.7,1.78,1.75,41.7,-27.6,0.087,202,0.2955,-0.0805,0.0323,0.1411,0.0085,0.0629,3302.9,3330.1

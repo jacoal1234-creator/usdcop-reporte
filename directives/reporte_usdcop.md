@@ -72,7 +72,22 @@ Orden de ejecución:
 2b. `python3 execution/pronostico_semana.py --niveles ...` → `.tmp/pronostico_semana.json` (tabla día a día hasta el viernes)
 3. `python3 execution/build_outputs.py --etiqueta AAAA-MM-DD` → `reportes/<etiqueta>_usdcop.xlsx` y `reportes/<etiqueta>_cono.png`
 4. El agente investiga noticias, consenso y calendario en la web y redacta `reportes/<etiqueta>_diario.md` o `_semanal.md` con las cifras de `.tmp/modelo.json`. Nunca escribe cifras a mano que el modelo ya produce.
-5. `python3 execution/build_readme.py --etiqueta AAAA-MM-DD` → regenera `README.md` (portada visual del repo: KPIs, resumen del último reporte, cono, barras semanales, horizontes y lista de reportes) y `reportes/<etiqueta>_semanas.png`. Va después del paso 4 porque copia el resumen ejecutivo del reporte más reciente.
+5. Actualizar los CSV de texto de `data/` (ver sección Web), luego `python3 execution/build_site_data.py` y `python3 execution/validate_data.py`.
+6. `python3 execution/build_readme.py --etiqueta AAAA-MM-DD` → regenera `README.md` (portada visual del repo: KPIs, resumen del último reporte, cono, barras semanales, horizontes y lista de reportes) y `reportes/<etiqueta>_semanas.png`. Va después del paso 4 porque copia el resumen ejecutivo del reporte más reciente.
+
+## Web (GitHub Pages, estilo del repo nyc-trip-2026)
+- `index.html` + `hero3d.js` (Three.js r128, GSAP 3.12.5) leen los CSV de `data/`. Es la portada de https://jacoal1234-creator.github.io/usdcop-reporte/. App instalable (`manifest.webmanifest`, `sw.js`).
+- **CSV numéricos** (los genera `python3 execution/build_site_data.py`, nunca a mano): resumen, trm, mercados, semanal, semana_dias, niveles_semana, horizontes, escenarios, cono, backtest, reportes, fuentes_datos.
+- **CSV de texto con fuente** (los escribe el agente en cada reporte; etiqueta H/E/O obligatoria; campos con coma entre comillas):
+  - `hoy.csv`: 3–5 noticias del día que mueven el dólar.
+  - `motivos.csv`: por qué se movió cada semana (`semana_fin` = exactamente el valor de la columna `fin` de data/semanal.csv, normalmente el viernes; si el viernes fue festivo, el último día con TRM).
+  - `consenso.csv`: proyecciones de analistas (valor puntual o min/max).
+  - `eventos.csv`: calendario de las próximas 4 semanas (impacto alto/medio/bajo).
+  - `escenarios_opinion.csv`: probabilidad ajustada [O] y "qué tendría que pasar"; los nombres de `horizonte` deben coincidir exactamente con `escenarios.csv` (incluido "Viernes DD-MM", que cambia cada semana).
+  - `lectura.csv`: importador, exportador y riesgos.
+- Validar siempre con `python3 execution/validate_data.py` antes del push.
+- Si cambias `index.html` o `hero3d.js`, sube `V` en `sw.js` para que los celulares bajen lo nuevo.
+- Probar localmente: `python3 -m http.server 8765` y abrir http://localhost:8765.
 
 ## Automatización
 - Tarea programada local `reporte-usdcop-lunes`: cada lunes a las 10:00 (hora local) corre todo el flujo, escribe `reportes/<fecha>_semanal.md` y hace commit y push. Solo corre si la app de Claude está abierta; si estaba cerrada, corre al volver a abrirla.
