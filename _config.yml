@@ -1,0 +1,11 @@
+title: "USD/COP · Reporte del dólar en Colombia"
+description: "Reporte del dólar frente al peso colombiano sobre la TRM oficial. Análisis informativo, no es recomendación de inversión."
+theme: jekyll-theme-cayman
+lang: es
+exclude:
+  - CLAUDE.md
+  - AGENTS.md
+  - GEMINI.md
+  - directives/
+  - execution/
+  - .env.example
