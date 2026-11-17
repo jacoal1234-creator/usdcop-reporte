@@ -7,7 +7,7 @@
 ## Contexto del proyecto (USD/COP)
 
 - **Qué es:** reporte del dólar frente al peso colombiano (USD/COP), de uso personal (el lector es el dueño del repo). No es un trabajo académico.
-- **Frecuencia:** semanal. Excepción pedida: la semana del 17 al 21 de noviembre de 2026 se hace un reporte día a día.
+- **Frecuencia:** semanal. Excepción pedida: la semana del 17 al 20 de noviembre de 2026 (el viernes es el 20) se hace un reporte día a día.
 - **"Cierre" = TRM del día** (la tasa oficial que certifica la Superfinanciera). La serie base de todo el análisis es la TRM diaria.
 - **Entrega:** repositorio de GitHub.
 - **SOP del reporte:** `directives/reporte_usdcop.md` (partes, formato de salida y reglas).
@@ -31,6 +31,9 @@
 
 ### Registro de aprendizajes
 
+- **2026-11-17 — Pronóstico de la semana:** el usuario quiere un pronóstico día a día hasta el viernes, además de los horizontes de 1 semana, 4 semanas y 3 meses. `execution/pronostico_semana.py` simula trayectorias diarias completas para dar rangos por día y la probabilidad de tocar soportes y resistencias. **Por qué importa:** cada reporte debe traer la tabla "esta semana hasta el viernes" (sección 4.0). Recordar que la TRM del viernes sale de las operaciones del jueves.
+- **2026-11-17 — Ojo con el calendario:** se escribió "viernes 21-nov" cuando el viernes era el 20. **Por qué importa:** calcular las fechas con código (pandas), nunca de memoria.
+- **2026-11-17 — datos.gov.co intermitente:** hacia las 12:30 p. m. la API de la TRM respondió "Service unavailable". **Por qué importa:** si falla, reintentar más tarde o usar la última TRM ya descargada en `.tmp/`, y decirlo en el reporte.
 - **2026-11-17 — Página web (GitHub Pages):** el repo es **público** desde el 17-nov (decisión del usuario) y Pages publica `main` en https://jacoal1234-creator.github.io/usdcop-reporte/ con Jekyll (tema Cayman, `_config.yml`). El README, generado por `execution/build_readme.py`, es la portada; Jekyll convierte los `.md` de `reportes/` en `.html`. Cada push la reconstruye en ~1 minuto. **Por qué importa:** todo lo que se suba es público; nunca subir `.env` ni datos personales. Con el repo privado en plan gratis, Pages no funciona.
 - **2026-11-17 — Automatización:** existe la tarea programada local `reporte-usdcop-lunes` (lunes 10:00) que corre el flujo completo y hace push. **Por qué importa:** si cambia el flujo o los scripts, revisar que el prompt de la tarea siga siendo válido (está en `~/.claude/scheduled-tasks/reporte-usdcop-lunes/SKILL.md`).
 - **2026-11-17 — FRED desde Python:** `fredgraph.csv` respondió con curl en rango corto, pero dio timeout desde urllib con rango desde 2023 (3 intentos). **Por qué importa:** el respaldo del Tesoro 10 años es Yahoo `^TNX`; la tasa efectiva de la Fed se cita en el texto en vez de entrar al modelo.
@@ -39,7 +42,7 @@
 - **2026-11-17 — TRM en datos.gov.co:** el endpoint `https://www.datos.gov.co/resource/32sa-8pi3.json` (Socrata, sin API key) responde. Cada registro trae `valor`, `vigenciadesde` y `vigenciahasta`, y un registro puede cubrir varios días (fin de semana y festivos; ej. la TRM de 3.316,70 rige del 14 al 17-nov-2026). **Por qué importa:** para retornos diarios hay que usar un dato por día hábil y no repetir el mismo valor en festivos, o la volatilidad sale subestimada.
 - **2026-11-17 — Fuentes accesibles desde esta máquina:** Yahoo Finance (`query1.finance.yahoo.com`, `COP=X`) y FRED (`fredgraph.csv?id=...`, sin key) responden HTTP 200. **Por qué importa:** DXY, Brent y tasas del Tesoro se pueden bajar con scripts; no hace falta descarga manual.
 - **2026-11-17 — Entorno Python:** Python 3.14, pandas 3.0, statsmodels, yfinance, openpyxl y matplotlib instalados. `arch` no está instalado; el GARCH(1,1)-t se implementó con scipy (máxima verosimilitud), así que no hace falta. `gh` está autenticado.
-- **2026-11-17 — Decisiones iniciales con el usuario:** uso personal, reporte semanal (diario solo la semana 17–21 nov 2026), cierre = TRM del día, entrega en GitHub. **Por qué importa:** la tabla semanal se construye sobre la TRM; la apertura, el máximo y el mínimo son de la TRM de la semana, no del spot intradía.
+- **2026-11-17 — Decisiones iniciales con el usuario:** uso personal, reporte semanal (diario solo la semana 17–20 nov 2026), cierre = TRM del día, entrega en GitHub. **Por qué importa:** la tabla semanal se construye sobre la TRM; la apertura, el máximo y el mínimo son de la TRM de la semana, no del spot intradía.
 
 <!-- Agrega nuevas entradas arriba de esta línea. -->
 

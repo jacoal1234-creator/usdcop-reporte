@@ -7,7 +7,7 @@ Construir el reporte del dólar frente al peso colombiano (USD/COP), con el rol 
 
 ## Modos
 - **Semanal** (modo normal): cubre las últimas 8 a 12 semanas y se publica al cierre de cada semana.
-- **Diario** (solo la semana del 17 al 21-nov-2026): un reporte por día hábil (17–20 nov) con la TRM del día, la variación, los motivos con fuente, el pronóstico actualizado y el calendario. El viernes 21 sale el semanal completo. Plantilla: `reportes/2026-11-17_diario.md`.
+- **Diario** (solo la semana del 16 al 20-nov-2026): un reporte por día hábil (17–19 nov) con la TRM del día, la variación, los motivos con fuente, el pronóstico actualizado y el calendario. El viernes 20 sale el semanal completo. Plantilla: `reportes/2026-11-17_diario.md`.
 
 ## Definiciones
 - **Cierre = TRM del día.** La serie base es la TRM diaria de la Superfinanciera (datos.gov.co, recurso `32sa-8pi3`).
@@ -40,6 +40,12 @@ Identifica tendencia, soportes y resistencias, rango típico semanal y semanas a
 - **Especificación vigente:** ARIMA(p,0,q) sobre retornos log diarios (p,q ≤ 2, elegido por AIC) frente a la caminata aleatoria. Si el ARIMA no le gana en MAE de backtest, el valor central es la caminata aleatoria. Intervalos: GARCH(1,1)-t (MLE con scipy, 20.000 simulaciones, semilla 42). Escenarios: banda base = valor central ± 0,5 desviaciones del retorno simulado; probabilidades del modelo [E] más un ajuste con criterio [O]. Regresión semanal explicativa (HAC): ΔTRM ~ ΔDXY + ΔBrent + ΔUST10. Ventana: TRM desde 2023-01-01.
 - **Diferencial de tasas:** fuera de la regresión (la tasa de política cambia en escalones). Se reporta en el texto: BanRep (12,25% a nov-2026) menos el rango de la Fed.
 
+## Parte 3b. Pronóstico de la semana en curso (pedido por el usuario)
+- En cada reporte, sección 4.0: tabla día a día hasta el viernes (TRM de cada día hábil, más la TRM del fin de semana), con valor central, rango del 50%, IC 80% y 95%, y probabilidad de subir.
+- Escenarios para la TRM del viernes (modelo [E] y ajustada [O]) y probabilidad de tocar soportes y resistencias en la semana.
+- Herramienta: `python3 execution/pronostico_semana.py --niveles <soportes,resistencias> [--festivos AAAA-MM-DD,...]`, después de `model.py`. Pasar los festivos de Colombia de la semana.
+- Si es lunes, el horizonte va de martes a viernes.
+
 ## Parte 4. Lectura para decisiones
 - Qué significa el panorama para un importador y para un exportador (cobertura, forwards, momento de compra/venta de divisas), en lenguaje claro.
 - Principales riesgos que invalidarían el análisis.
@@ -63,6 +69,7 @@ Identifica tendencia, soportes y resistencias, rango típico semanal y semanas a
 Orden de ejecución:
 1. `python3 execution/fetch_data.py` → `.tmp/trm.csv`, `.tmp/mercados.csv`, `.tmp/estado_datos.json`
 2. `python3 execution/model.py` → `.tmp/semanal.csv`, `.tmp/backtest.csv`, `.tmp/cono.csv`, `.tmp/modelo.json`
+2b. `python3 execution/pronostico_semana.py --niveles ...` → `.tmp/pronostico_semana.json` (tabla día a día hasta el viernes)
 3. `python3 execution/build_outputs.py --etiqueta AAAA-MM-DD` → `reportes/<etiqueta>_usdcop.xlsx` y `reportes/<etiqueta>_cono.png`
 4. El agente investiga noticias, consenso y calendario en la web y redacta `reportes/<etiqueta>_diario.md` o `_semanal.md` con las cifras de `.tmp/modelo.json`. Nunca escribe cifras a mano que el modelo ya produce.
 5. `python3 execution/build_readme.py --etiqueta AAAA-MM-DD` → regenera `README.md` (portada visual del repo: KPIs, resumen del último reporte, cono, barras semanales, horizontes y lista de reportes) y `reportes/<etiqueta>_semanas.png`. Va después del paso 4 porque copia el resumen ejecutivo del reporte más reciente.
@@ -80,4 +87,4 @@ Orden de ejecución:
 - FRED (`fredgraph.csv`) puede dar timeout desde Python con rangos largos. `fetch_data.py` reintenta 3 veces y para el Tesoro a 10 años usa Yahoo `^TNX` como respaldo.
 - El backtest solo usa semanas completas; la semana en curso nunca es objetivo.
 - Las búsquedas web mezclan noticias de nov-2025 con nov-2026: verificar siempre el año en la URL o la fecha de la nota.
-- Pendiente para el semanal del 21-nov: explicar las semanas atípicas (21–25 sep, +5,64%; 5–9 oct, −2,69%) con fuentes.
+- Pendiente para el próximo semanal: explicar las semanas atípicas (21–25 sep, +5,64%; 5–9 oct, −2,69%) con fuentes.

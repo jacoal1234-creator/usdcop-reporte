@@ -11,7 +11,7 @@
 - **[H]** La TRM de hoy es **$3.316,70**. Rige desde el sábado 14 porque el lunes 16 fue festivo. Está +0,45% sobre la del viernes 13 ($3.301,91) y +4,7% sobre el mínimo del 28 de octubre ($3.148,02).
 - **[H]** Hilamos tres semanas de alza por un petróleo que se desplomó (Brent de ~118 a ~93 USD) y un dólar global fuerte, porque el mercado da casi por hecha una **subida** de la Fed el 9 de diciembre.
 - **[H]** Hoy el spot abrió a la baja ($3.307,85) y a las 10 a. m. el DANE publicó el PIB del tercer trimestre: **0,5% anual**, por debajo de todas las proyecciones.
-- **[E]** El modelo no tiene una dirección para la semana. El valor central es $3.316,70 (caminata aleatoria) y el rango al 80% va de **$3.248 a $3.386**.
+- **[E]** **Para el viernes 20-nov**, el modelo da un valor central de $3.316,70, un rango al 80% de **$3.264 a $3.370**, un 41% de probabilidad de cerrar entre $3.295 y $3.338, y un 27% de tocar $3.350 en la semana. El detalle día a día está en la sección 4.0.
 - **[O]** El sesgo de corto plazo es levemente alcista para el dólar mientras siga el impulso de la Fed. Pero la estacionalidad de fin de año y el consenso de analistas (~$3.250–3.280 a diciembre) apuntan a un retroceso en el mes.
 
 ➡️ **[Leer el reporte completo](reportes/2026-11-17_diario.md)**
